@@ -27,7 +27,7 @@ public final class PropertiesStore
         }
         catch (Exception e)
         {
-            LOGGER.finest(Constants.IGNORE_EXCEPTION + e.getMessage());
+            LOGGER.finest(e.getMessage());
         }
         LOGGER.finest("getProperty = " + value);
         return value;
