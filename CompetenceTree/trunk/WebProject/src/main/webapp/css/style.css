@@ -1,0 +1,304 @@
+﻿body {
+	margin: 30px;
+}
+
+/** BEGIN header **/
+#header {
+	height: 50px;
+	background-color: rgb(0, 159, 189);
+	display: block;
+}
+
+#header h1 {
+	padding-top: 10px;
+	text-align: center;
+	color: #ffffff;
+}
+
+#header h1 a {
+	display: block;
+	color: #ffffff;
+	/*outline: none;*/
+	/*text-indent: -9999px;
+		/*background: url(images/logo.jpg) no-repeat 0 0;*/
+	text-decoration: none;
+	height: 50px;
+	padding: 0;
+}
+/** END header **/
+body {
+	text-align: center;
+	font: 12px Verdana;
+	color: #000000;
+	background: rgb(87, 86, 86);
+}
+
+.loginTable {
+	margin: 15% 20%;
+}
+
+table.loginForm {
+	width: "40%";
+	border: "1";
+	cellspacing: 0;
+	cellpadding: 0;
+	align: center;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+	padding: 10px;
+	background-color: rgb(250, 250, 250);
+	border-radius: 10px 10px 12px 10px;
+	border-radius: 10px 10px 12px 10px;
+	border-radius: 10px 10px 11px 10px;
+	border-style: dotted;
+}
+
+.formDiv {
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.formDiv form {
+	
+}
+
+.opi3Content {
+	padding-top: 20px;
+	padding-left: 50px;
+	float: left;
+}
+
+table#opi3table,#opi3table th {
+	border: 1px solid #5a8078;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td.opi3td {
+	border-top: 1px solid #5a8078;
+}
+
+.content {
+	min-height: 200px;
+}
+
+#opi3table  a {
+	text-decoration: none;
+	color: rgb(0, 159, 189);
+}
+
+#opi3table th {
+	background-color: #5a8078;
+	color: white;
+}
+
+#centerDiv {
+	align: center;
+}
+
+/** BEGIN navigation **/
+#trans-nav {
+	list-style-type: none;
+	height: 40px;
+	padding: 0;
+	margin: 0;
+}
+
+#trans-nav li {
+	float: left;
+	position: relative;
+	padding: 0;
+	line-height: 40px;
+	background: #5a8078;
+}
+
+#trans-nav li:hover {
+	background-position: 0 -40px;
+}
+
+#trans-nav li a {
+	display: block;
+	padding: 0 15px;
+	color: #fff;
+	text-decoration: none;
+}
+
+#trans-nav li a:hover {
+	color: #a3f1d7;
+}
+
+#trans-nav li ul {
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	width: 8em;
+	background: #63867f;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#trans-nav li:hover ul {
+	opacity: 1;
+}
+
+#trans-nav li ul li {
+	float: none;
+	position: static;
+	height: 0;
+	line-height: 0;
+	background: none;
+	width: 300px;
+}
+
+#trans-nav li:hover ul li {
+	height: 30px;
+	line-height: 30px;
+}
+
+#trans-nav li ul li a {
+	background: #63867f;
+}
+
+#trans-nav li ul li a:hover {
+	background: #5a8078;
+}
+
+#trans-nav li {
+	-webkit-transition: all 0.1s;
+}
+
+#trans-nav li a {
+	-webkit-transition: all 0.2s;
+}
+
+#trans-nav li ul {
+	-webkit-transition: all 0.5s;
+}
+
+#trans-nav li ul li {
+	-webkit-transition: height 0.2s;
+}
+/** END navigation **/
+
+/** BEGIN footer **/
+#footer {
+	background-color: rgb(0, 159, 189);
+	color: #ffffff;
+	font-size: 0.9em;
+	padding: 20px 0 30px;
+	line-height: 1.7em;
+	margin-top: 20px;
+	float: left;
+	width: 100%;
+	display: block;
+}
+
+#footer .wrapper {
+	width: 946px;
+}
+
+#footer a {
+	color: #ffffff;
+}
+
+#footer .l {
+	float: left;
+	padding-left: 20px;
+}
+
+#footer .r {
+	float: right;
+	padding: 16px 20px 0 0;
+}
+/** END footer **/
+
+/** Begin opi2 **/
+
+/**
+input , button {
+	background-color: #63867F;
+	color: #FFFFFF;
+	border-style: solid;
+	border-color: #63867F;
+	font-size: 16pt;
+}
+**/
+.opi2Content {
+	color: #FFFFFF;
+}
+
+.button {
+	font: bold 11px Arial;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #333333;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+}
+
+/** END opi2 **/
+
+/** Begin opi6 **/
+.opi6Content {
+	box-shadow: 0 0 20px rgb(0, 0, 0);
+	background-color: whitesmoke;
+}
+
+table#opi6table th {
+	border: 1px solid #5a8078;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/** END opi6 **/
+
+/** BEGIN Scrum Feature content **/
+#scrum_feature_content table,th {
+	border: 1px solid #5a8078;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+}
+
+#scrum_feature_content td {
+	border-top: 1px solid #5a8078;
+	border-left: 1px solid #5a8078;
+}
+
+#scrum_feature_content  a {
+	text-decoration: none;
+	color: rgb(0, 159, 189);
+}
+
+#scrum_feature_content th {
+	background-color: #5a8078;
+	color: white;
+}
+
+#scrum_feature_content h1,h2,h3,h4 {
+	color: white;
+}
+/** END Scrum Feature content **/
+#wiki_content div {
+	color: black;
+	background: whitesmoke;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: left;
+	font: 24px Veranda;
+}
+#month_selector fieldset {
+	border-color: #63867F;
+	border-width: 5px;
+	border-style: solid;
+}
+#month_selector {
+	color: white;
+}
