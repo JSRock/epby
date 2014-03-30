@@ -9,9 +9,7 @@
     <name>Competence Tree Tool</name>
 
     <modules>
-        <module>ServicesInterface</module>
         <module>WebProject</module>
-        <module>Services</module>
         <module>CompetenceTreeEar</module>
     </modules>
     
