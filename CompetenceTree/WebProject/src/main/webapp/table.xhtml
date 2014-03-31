@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>PrimeFaces - ShowCase</title>
+            <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/images/favicon.png" />
+        </f:facet>
+        
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+
+		<ui:insert name="head"></ui:insert>
+
+	</h:head>
+
+<h:body>
+<h:form id="form">
+
+    <p:treeTable value="#{treeCheckboxBean.root}" var="document" id="multiSelect"
+                 selection="#{treeCheckboxBean.selectedNodes}" selectionMode="checkbox">
+
+        <f:facet name="header">
+            Checkbox Selection
+        </f:facet>
+
+        <p:column style="width:150px">
+            <f:facet name="header">
+                Name
+            </f:facet>
+            <h:outputText value="#{document.name}" />
+        </p:column>
+
+        <p:column style="width:100px">
+            <f:facet name="header">
+                Size
+            </f:facet>
+            <h:outputText value="#{document.size}" />
+        </p:column>
+
+        <p:column style="width:100px">
+            <f:facet name="header">
+                Type
+            </f:facet>
+            <h:outputText value="#{document.type}" />
+        </p:column>
+
+        <f:facet name="footer">
+            <p:commandButton value="View" icon="ui-icon-search" update=":form:documentPanel" oncomplete="PF('documentDialog').show()"/>
+        </f:facet>
+    </p:treeTable>
+
+    <p:dialog id="dialog" header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true">
+        <p:outputPanel id="documentPanel">                        
+            <p:dataList value="#{treeCheckboxBean.selectedNodes}" var="selectedNode" rendered="#{not empty treeCheckboxBean.selectedNodes}">
+                #{selectedNode.data.name}
+            </p:dataList>
+        </p:outputPanel>
+    </p:dialog>
+
+</h:form>
+
+</h:body>
+</html>
