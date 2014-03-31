@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <proxies>
+   <proxy>
+      <active>false</active>
+      <protocol>http</protocol>
+      <host>host1</host>
+      <port>8080</port>
+      <nonProxyHosts>host2</nonProxyHosts>
+    </proxy>
+  </proxies>
+  <profiles>
+    <profile>
+        <id>sonar</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <sonar.jdbc.url>
+              jdbc:h2:tcp://localhost:9092/sonar
+            </sonar.jdbc.url>
+            <sonar.jdbc.username>sonar</sonar.jdbc.username>
+            <sonar.jdbc.password>sonar</sonar.jdbc.password>
+            <sonar.host.url>
+              http://localhost:9000
+            </sonar.host.url>
+        </properties>
+    </profile>
+  </profiles>
+</settings>
