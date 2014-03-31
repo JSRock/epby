@@ -22,7 +22,6 @@ public final class TestServlet extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = Logger.getLogger(TestServlet.class.getName());
 
-
     /**
      * @see HttpServlet#HttpServlet()
      */
