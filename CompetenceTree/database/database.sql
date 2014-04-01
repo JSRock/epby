@@ -13,8 +13,9 @@ DROP TABLE IF EXISTS `mydb`.`competences` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`competences` (
   `competence_id` INT NOT NULL AUTO_INCREMENT,
-  `competence_name` VARCHAR(255) NOT NULL,
-  `competence_wiki_link` VARCHAR(255) NULL,
+  `competence_name` VARCHAR(255) NOT NULL COMMENT 'Competence name',
+  `competence_description` VARCHAR(255) NULL COMMENT 'Competence description',
+  `competence_wiki_link` VARCHAR(255) NULL COMMENT 'Competence wiki link',
   PRIMARY KEY (`competence_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -27,8 +28,8 @@ COLLATE = utf8_unicode_ci;
 DROP TABLE IF EXISTS `mydb`.`competences_relations` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`competences_relations` (
-  `competence_id` INT NOT NULL,
-  `competence_parent_id` INT NOT NULL,
+  `competence_id` INT NOT NULL COMMENT 'Competence id from table competences',
+  `competence_parent_id` INT NOT NULL COMMENT 'Parent node id of competence with competence_id',
   PRIMARY KEY (`competence_id`, `competence_parent_id`),
   INDEX `fk_competence_parent_id_idx` (`competence_parent_id` ASC),
   CONSTRAINT `fk_competence_id_rl`
@@ -52,8 +53,8 @@ COLLATE = utf8_unicode_ci;
 DROP TABLE IF EXISTS `mydb`.`user_competences` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`user_competences` (
-  `user_id` INT NOT NULL,
-  `competence_id` INT NOT NULL,
+  `user_id` INT NOT NULL COMMENT 'User id from LDAP',
+  `competence_id` INT NOT NULL COMMENT 'Competence that is checked by User',
   PRIMARY KEY (`user_id`),
   INDEX `fk_competence_id_idx` (`competence_id` ASC),
   CONSTRAINT `fk_competence_id_uc`
