@@ -11,7 +11,9 @@ import org.primefaces.model.CheckboxTreeNode;
 public class TreeCheckboxBean implements Serializable
 {
 
-    private static final Logger logger = Logger.getLogger(TreeCheckboxBean.class.getName());
+    private static final long serialVersionUID = -5710580196250379639L;
+
+    private static final Logger LOGGER = Logger.getLogger(TreeCheckboxBean.class.getName());
 
     private TreeNode root;
 
@@ -21,14 +23,16 @@ public class TreeCheckboxBean implements Serializable
 
     public TreeCheckboxBean()
     {
+        LOGGER.finest("TreeCheckboxBean");
         root = new CheckboxTreeNode(new Document("Files", "-", "Folder"), null);
 
-        TreeNode documents = new CheckboxTreeNode(new Document("Documents", "-", "Folder"), root);
-        TreeNode pictures = new CheckboxTreeNode(new Document("Pictures", "-", "Folder"), root);
-        TreeNode movies = new CheckboxTreeNode(new Document("Movies", "-", "Folder"), root);
+        TreeNode documents = new CheckboxTreeNode(new Document("Java", "-", "http://test1"), root);
+        documents.setSelectable(false);
+        TreeNode pictures = new CheckboxTreeNode(new Document("Documentation", "-", "http://test2"), root);
+        TreeNode movies = new CheckboxTreeNode(new Document("Continuous integration", "-", "http://test3"), root);
 
-        TreeNode work = new CheckboxTreeNode(new Document("Work", "-", "Folder"), documents);
-        TreeNode primefaces = new CheckboxTreeNode(new Document("PrimeFaces", "-", "Folder"), documents);
+        TreeNode work = new CheckboxTreeNode(new Document("Compilation", "-", "http://test4"), documents);
+        TreeNode primefaces = new CheckboxTreeNode(new Document("Troubleshooting", "-", "http://test5"), documents);
 
         // Documents
         TreeNode expenses =

@@ -5,47 +5,49 @@ import java.io.Serializable;
 public class Document implements Serializable, Comparable<Document>
 {
 
-    private String name;
+    private static final long serialVersionUID = 2720091736864359719L;
 
-    private String size;
+    private String itsName;
 
-    private String type;
+    private String itsDescription;
 
-    public Document(String name, String size, String type)
+    private String itsWikiLink;
+
+    public Document(final String aName, final String aDescription, final String aWikiLink)
     {
-        this.name = name;
-        this.size = size;
-        this.type = type;
+        this.itsName = aName;
+        this.itsDescription = aDescription;
+        this.itsWikiLink = aWikiLink;
     }
 
     public String getName()
     {
-        return name;
+        return itsName;
     }
 
-    public void setName(String name)
+    public void setName(final String aName)
     {
-        this.name = name;
+        this.itsName = aName;
     }
 
-    public String getSize()
+    public String getDescription()
     {
-        return size;
+        return itsDescription;
     }
 
-    public void setSize(String size)
+    public void setDescription(final String aDescription)
     {
-        this.size = size;
+        this.itsDescription = aDescription;
     }
 
-    public String getType()
+    public String getWikiLink()
     {
-        return type;
+        return itsWikiLink;
     }
 
-    public void setType(String type)
+    public void setWikiLink(final String aWikiLink)
     {
-        this.type = type;
+        this.itsWikiLink = aWikiLink;
     }
 
     // Eclipse Generated hashCode and equals
@@ -54,9 +56,9 @@ public class Document implements Serializable, Comparable<Document>
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((size == null) ? 0 : size.hashCode());
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        result = prime * result + ((itsName == null) ? 0 : itsName.hashCode());
+        result = prime * result + ((itsDescription == null) ? 0 : itsDescription.hashCode());
+        result = prime * result + ((itsWikiLink == null) ? 0 : itsWikiLink.hashCode());
         return result;
     }
 
@@ -70,26 +72,26 @@ public class Document implements Serializable, Comparable<Document>
         if (getClass() != obj.getClass())
             return false;
         Document other = (Document) obj;
-        if (name == null)
+        if (itsName == null)
         {
-            if (other.name != null)
+            if (other.itsName != null)
                 return false;
         }
-        else if (!name.equals(other.name))
+        else if (!itsName.equals(other.itsName))
             return false;
-        if (size == null)
+        if (itsDescription == null)
         {
-            if (other.size != null)
+            if (other.itsDescription != null)
                 return false;
         }
-        else if (!size.equals(other.size))
+        else if (!itsDescription.equals(other.itsDescription))
             return false;
-        if (type == null)
+        if (itsWikiLink == null)
         {
-            if (other.type != null)
+            if (other.itsWikiLink != null)
                 return false;
         }
-        else if (!type.equals(other.type))
+        else if (!itsWikiLink.equals(other.itsWikiLink))
             return false;
         return true;
     }
@@ -97,7 +99,7 @@ public class Document implements Serializable, Comparable<Document>
     @Override
     public String toString()
     {
-        return name;
+        return itsName;
     }
 
     public int compareTo(Document document)
