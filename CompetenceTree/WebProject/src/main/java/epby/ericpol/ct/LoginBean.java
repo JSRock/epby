@@ -1,36 +1,43 @@
 package epby.ericpol.ct;
 
+import java.util.Hashtable;
+import java.util.logging.Logger;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.naming.Context;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 
 import org.primefaces.context.RequestContext;
 
 public class LoginBean
 {
 
-    private String username;
+    private static final Logger LOGGER = Logger.getLogger(LoginBean.class.getName());
+    private String itsUsername;
 
-    private String password;
+    private String itsPassword;
 
     public String getUsername()
     {
-        return username;
+        return itsUsername;
     }
 
-    public void setUsername(String username)
+    public void setUsername(final String anUsername)
     {
-        this.username = username;
+        this.itsUsername = anUsername;
     }
 
     public String getPassword()
     {
-        return password;
+        return itsPassword;
     }
 
-    public void setPassword(String password)
+    public void setPassword(final String aPassword)
     {
-        this.password = password;
+        this.itsPassword = aPassword;
     }
 
     public void login(ActionEvent actionEvent)
@@ -39,10 +46,10 @@ public class LoginBean
         FacesMessage msg = null;
         boolean loggedIn = false;
 
-        if (username != null && username.equals("admin") && password != null && password.equals("admin"))
+        if (null != itsUsername && null != itsPassword && ldapLogin(itsUsername, itsPassword))
         {
             loggedIn = true;
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", itsUsername);
         }
         else
         {
@@ -52,5 +59,49 @@ public class LoginBean
 
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);
+    }
+
+    /**
+     * Method authenticated by LDAP
+     * 
+     * @param paramMap
+     * @return boolean - if LDAP authentication pass
+     */
+    private boolean ldapLogin(final String anUser, final String aPassword)
+    {
+
+        // Set up the environment for creating the initial context
+        String username = anUser;
+        String password = aPassword;
+        String dn = "uid=" + username + "," + ConfigurationProperties.getLdapBase();
+
+        Hashtable<String, String> authEnv = new Hashtable<String, String>();
+        authEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+        authEnv.put(Context.PROVIDER_URL, ConfigurationProperties.getLdapUri());
+        authEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
+        authEnv.put(Context.SECURITY_PRINCIPAL, dn);
+        authEnv.put(Context.SECURITY_CREDENTIALS, password);
+
+        // Create the initial context
+        try
+        {
+            DirContext ctx = new InitialDirContext(authEnv);
+
+            boolean result = ctx != null;
+            LOGGER.finest("LDAP Login result:" + result);
+
+            if (ctx != null)
+            {
+                ctx.close();
+            }
+            return result;
+        }
+        catch (Exception ex)
+        {
+            LOGGER.finest(ex.getMessage());
+            LOGGER.finest(dn);
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

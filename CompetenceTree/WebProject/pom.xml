@@ -12,7 +12,7 @@
 
     <groupId>epby.ericpol.ct</groupId>
     <artifactId>WebProject</artifactId>
-    <name>Competences Tree Tool Web</name>
+    <name>Competence Tree Tool Web</name>
     <packaging>war</packaging>
 
     <dependencies>
