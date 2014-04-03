@@ -4,13 +4,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
 
 <h:head>
 	<f:facet name="first">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-		<title>PrimeFaces - ShowCase</title>
+		<title>Competence Tree</title>
 		<link rel="shortcut icon" type="image/png"
 			href="#{request.contextPath}/images/favicon.png" />
 	</f:facet>
@@ -32,7 +34,7 @@
 			selectionMode="checkbox">
 
 			<f:facet name="header">
-            Checkbox Selection
+            Competence Tree
         </f:facet>
 
 			<p:column style="width:150px">
@@ -60,12 +62,16 @@
 				</h:outputLink>
 			</p:column>
 
+
 			<f:facet name="footer">
 				<p:commandButton value="View" icon="ui-icon-search"
 					update=":form:documentPanel"
 					oncomplete="PF('documentDialog').show()" />
+				<p:commandButton value="Save" actionListener="#{treeCheckboxBean.save}"
+					update=":form:documentPanel" />
 			</f:facet>
 		</p:treeTable>
+
 
 		<p:dialog id="dialog" header="Document Detail" showEffect="fade"
 			widgetVar="documentDialog" modal="true">
@@ -75,8 +81,10 @@
 					rendered="#{not empty treeCheckboxBean.selectedNodes}">
                 #{selectedNode.data.name}
             </p:dataList>
-			</p:outputPanel>
+            Score : #{treeCheckboxBean.countSelectedNodes} / #{treeCheckboxBean.countLeafNodes}
+        </p:outputPanel>
 		</p:dialog>
+
 
 	</h:form>
 

@@ -66,33 +66,51 @@ public class Document implements Serializable, Comparable<Document>
     public boolean equals(Object obj)
     {
         if (this == obj)
+        {
             return true;
+        }
         if (obj == null)
+        {
             return false;
+        }
         if (getClass() != obj.getClass())
+        {
             return false;
+        }
         Document other = (Document) obj;
         if (itsName == null)
         {
             if (other.itsName != null)
+            {
                 return false;
+            }
         }
         else if (!itsName.equals(other.itsName))
+        {
             return false;
+        }
         if (itsDescription == null)
         {
             if (other.itsDescription != null)
+            {
                 return false;
+            }
         }
         else if (!itsDescription.equals(other.itsDescription))
+        {
             return false;
+        }
         if (itsWikiLink == null)
         {
             if (other.itsWikiLink != null)
+            {
                 return false;
+            }
         }
         else if (!itsWikiLink.equals(other.itsWikiLink))
+        {
             return false;
+        }
         return true;
     }
 

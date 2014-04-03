@@ -2,24 +2,27 @@ package epby.ericpol.ct;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
+import java.util.List;
+import java.util.LinkedList;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.CheckboxTreeNode;
+import org.primefaces.context.RequestContext;
 
 public class TreeCheckboxBean implements Serializable
 {
 
-    private static final long serialVersionUID = -5710580196250379639L;
+    private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(TreeCheckboxBean.class.getName());
 
     private TreeNode root;
 
-    private TreeNode root2;
-
     private TreeNode[] selectedNodes;
+
 
     public TreeCheckboxBean()
     {
@@ -29,10 +32,14 @@ public class TreeCheckboxBean implements Serializable
         TreeNode documents = new CheckboxTreeNode(new Document("Java", "-", "http://test1"), root);
         documents.setSelectable(false);
         TreeNode pictures = new CheckboxTreeNode(new Document("Documentation", "-", "http://test2"), root);
+        pictures.setSelectable(false);
         TreeNode movies = new CheckboxTreeNode(new Document("Continuous integration", "-", "http://test3"), root);
+        movies.setSelectable(false);
 
         TreeNode work = new CheckboxTreeNode(new Document("Compilation", "-", "http://test4"), documents);
+        work.setSelectable(false);
         TreeNode primefaces = new CheckboxTreeNode(new Document("Troubleshooting", "-", "http://test5"), documents);
+        primefaces.setSelectable(false);
 
         // Documents
         TreeNode expenses =
@@ -52,7 +59,9 @@ public class TreeCheckboxBean implements Serializable
 
         // Movies
         TreeNode pacino = new CheckboxTreeNode(new Document("Al Pacino", "-", "Folder"), movies);
+        pacino.setSelectable(false);
         TreeNode deniro = new CheckboxTreeNode(new Document("Robert De Niro", "-", "Folder"), movies);
+        deniro.setSelectable(false);
 
         TreeNode scarface = new CheckboxTreeNode("mp3", new Document("Scarface", "15 GB", "Movie File"), pacino);
         TreeNode carlitosWay =
@@ -61,23 +70,6 @@ public class TreeCheckboxBean implements Serializable
         TreeNode goodfellas = new CheckboxTreeNode("mp3", new Document("Goodfellas", "23 GB", "Movie File"), deniro);
         TreeNode untouchables =
                 new CheckboxTreeNode("mp3", new Document("Untouchables", "17 GB", "Movie File"), deniro);
-
-        root2 = new CheckboxTreeNode("Root", null);
-        TreeNode node0 = new CheckboxTreeNode("Node 0", root2);
-        TreeNode node1 = new CheckboxTreeNode("Node 1", root2);
-        TreeNode node2 = new CheckboxTreeNode("Node 2", root2);
-
-        TreeNode node00 = new CheckboxTreeNode("Node 0.0", node0);
-        TreeNode node01 = new CheckboxTreeNode("Node 0.1", node0);
-
-        TreeNode node10 = new CheckboxTreeNode("Node 1.0", node1);
-        TreeNode node11 = new CheckboxTreeNode("Node 1.1", node1);
-
-        TreeNode node000 = new CheckboxTreeNode("Node 0.0.0", node00);
-        TreeNode node001 = new CheckboxTreeNode("Node 0.0.1", node00);
-        TreeNode node010 = new CheckboxTreeNode("Node 0.1.0", node01);
-
-        TreeNode node100 = new CheckboxTreeNode("Node 1.0.0", node10);
 
     }
 
@@ -91,24 +83,23 @@ public class TreeCheckboxBean implements Serializable
         this.root = root;
     }
 
-    public TreeNode getRoot2()
-    {
-        return root2;
-    }
-
-    public void setRoot2(TreeNode root2)
-    {
-        this.root2 = root2;
-    }
-
     public TreeNode[] getSelectedNodes()
     {
         return selectedNodes;
     }
 
-    public void setSelectedNodes(TreeNode[] selectedNodes)
+    public void setSelectedNodes(TreeNode[] aSelectedNodes)
     {
-        this.selectedNodes = selectedNodes;
+        List<TreeNode> selectedNodes = new LinkedList();
+        for (TreeNode node : aSelectedNodes)
+        {
+            if (node.isLeaf())
+            {
+                selectedNodes.add(node);
+            }
+        }
+        TreeNode[] trueSelectedNodes = new TreeNode[selectedNodes.size()];
+        this.selectedNodes = selectedNodes.toArray(trueSelectedNodes);
     }
 
     public void displaySelectedMultiple()
@@ -127,5 +118,49 @@ public class TreeCheckboxBean implements Serializable
 
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+
+    public int getCountSelectedNodes()
+    {
+        if (null != selectedNodes)
+        {
+            return selectedNodes.length;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public int getCountLeafNodes()
+    {
+        return treeTraversal(root);
+    }
+
+    private int treeTraversal(TreeNode aRoot)
+    {
+        return preOrder(aRoot);
+    }
+
+    private int preOrder(TreeNode aNode)
+    {
+        int countLeafChild = 0;
+        List<TreeNode> children = aNode.getChildren();
+        for (TreeNode child : children)
+        {
+            if (child.isLeaf())
+            {
+                countLeafChild++;
+            }
+            countLeafChild += preOrder(child);
+        }
+        return countLeafChild;
+    }
+
+    public void save(ActionEvent actionEvent)
+    {
+        LOGGER.finest("Save! :)  selected nodes : " + selectedNodes.length);
+        RequestContext context = RequestContext.getCurrentInstance();
+
     }
 }
